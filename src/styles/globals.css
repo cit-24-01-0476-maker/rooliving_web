@@ -1,0 +1,289 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  
+  /* Dark Theme Colors - Based on your design */
+  --background: #1a1a1a;
+  --foreground: #ffffff;
+  --card: #2a2a2a;
+  --card-foreground: #ffffff;
+  --popover: #2a2a2a;
+  --popover-foreground: #ffffff;
+  
+  /* Orange Primary Color */
+  --primary: #ff6b35;
+  --primary-foreground: #ffffff;
+  
+  /* Black Secondary Color */
+  --secondary: #000000;
+  --secondary-foreground: #ffffff;
+  
+  --muted: #3a3a3a;
+  --muted-foreground: #a0a0a0;
+  --accent: #ff6b35;
+  --accent-foreground: #ffffff;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: transparent;
+  --input-background: #2a2a2a;
+  --switch-background: #3a3a3a;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #ff6b35;
+  
+  --chart-1: #ff6b35;
+  --chart-2: #ff8c42;
+  --chart-3: #ffa34d;
+  --chart-4: #ffba59;
+  --chart-5: #ffd166;
+  
+  --radius: 0.625rem;
+  --sidebar: #1a1a1a;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ff6b35;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2a2a2a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #ff6b35;
+}
+
+.dark {
+  --background: #1a1a1a;
+  --foreground: #ffffff;
+  --card: #2a2a2a;
+  --card-foreground: #ffffff;
+  --popover: #2a2a2a;
+  --popover-foreground: #ffffff;
+  --primary: #ff6b35;
+  --primary-foreground: #ffffff;
+  --secondary: #000000;
+  --secondary-foreground: #ffffff;
+  --muted: #3a3a3a;
+  --muted-foreground: #a0a0a0;
+  --accent: #ff6b35;
+  --accent-foreground: #ffffff;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: transparent;
+  --ring: #ff6b35;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: #ff6b35;
+  --chart-2: #ff8c42;
+  --chart-3: #ffa34d;
+  --chart-4: #ffba59;
+  --chart-5: #ffd166;
+  --sidebar: #1a1a1a;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ff6b35;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2a2a2a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #ff6b35;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* -----------------------------
+   Subtle UI Effects (safe)
+   - No layout changes
+   - Respects prefers-reduced-motion
+------------------------------ */
+
+html { scroll-behavior: smooth; }
+
+@keyframes fx-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fx-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Apply to page root wrappers */
+.fx-page {
+  animation: fx-fade-in 240ms ease-out both;
+}
+
+/* Apply to cards/sections that should softly appear */
+.fx-reveal {
+  animation: fx-fade-up 420ms ease-out both;
+}
+
+/* Card hover lift + glow (used on feature/service cards) */
+.fx-card {
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  will-change: transform;
+}
+
+.fx-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+}
+
+/* Button micro-interaction */
+.fx-btn {
+  transition: transform 120ms ease, box-shadow 160ms ease, background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+  will-change: transform;
+}
+
+.fx-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(0,0,0,0.35); }
+.fx-btn:active { transform: translateY(0); box-shadow: 0 8px 16px rgba(0,0,0,0.30); }
+
+/* Nav link underline animation */
+.fx-navlink {
+  position: relative;
+  transition: color 160ms ease;
+}
+
+.fx-navlink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+  opacity: 0.9;
+}
+
+.fx-navlink:hover::after { transform: scaleX(1); }
+
+/* Accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fx-page, .fx-reveal { animation: none !important; }
+  .fx-card, .fx-btn, .fx-navlink::after { transition: none !important; }
+  .fx-card:hover, .fx-btn:hover, .fx-btn:active { transform: none !important; box-shadow: none !important; }
+}
+
+/* ✅ Fix: Search bar / inputs showing double outline */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;  /* remove extra shadow */
+}
+
+/* ✅ Keep only Tailwind ring (or add a cleaner one) */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.35) !important;
+  border-color: #ff6b35 !important;
+}
