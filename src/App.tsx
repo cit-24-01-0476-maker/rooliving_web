@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
   Navigate,
@@ -38,22 +38,21 @@ import RequirementsStep1 from "./pages/RequirementsStep1";
 import RequirementsStep2 from "./pages/RequirementsStep2";
 import RequirementsStep3 from "./pages/RequirementsStep3";
 
-/** ✅ Redirect /services/:id  ->  /service/:id (param preserve) */
+/** ✅ Redirect /services/:id  ->  /service/:id */
 function ServiceRedirect() {
   const { id } = useParams();
   return <Navigate to={`/service/${id}`} replace />;
 }
 
-/** ✅ Redirect /plans/:id -> /plan-viewer (optional) */
+/** ✅ Redirect /plans/:id -> /plan-viewer?id=...  */
 function PlanRedirect() {
   const { id } = useParams();
   return <Navigate to={`/plan-viewer?id=${id ?? ""}`} replace />;
 }
 
-/** ✅ Redirect /book-service/:pkg -> /book-service (fix Book Basic/Standard/Premium 404) */
+/** ✅ Redirect /book-service/:pkg -> /book-service?pkg=...  */
 function BookServiceRedirect() {
   const { pkg } = useParams();
-  // keep pkg in query if you want to read it in BookServiceForm
   return <Navigate to={`/book-service?pkg=${pkg ?? ""}`} replace />;
 }
 
@@ -71,6 +70,7 @@ function NotFound() {
 /**
  * ✅ WelcomeGate FIX
  * only force /welcome on PUBLIC pages (/, /login, /signup)
+ * so internal pages won't go 404 because of gate
  */
 function WelcomeGate({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -88,7 +88,8 @@ function WelcomeGate({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    // ✅ HashRouter = GitHub Pages direct URL 404 fix
+    <HashRouter>
       <WelcomeGate>
         <Routes>
           {/* Welcome */}
@@ -106,22 +107,23 @@ export default function App() {
           <Route path="/plans" element={<PlansLibrary />} />
           <Route path="/services" element={<ServicesMarketplace />} />
 
-          {/* ✅ FIX: marketplace uses /services/:id */}
+          {/* ✅ FIX: Some cards/buttons use /services/:id */}
           <Route path="/services/:id" element={<ServiceRedirect />} />
 
-          {/* ✅ main service detail */}
+          {/* ✅ Main service detail */}
           <Route path="/service/:id" element={<ServiceDetail />} />
 
           {/* Booking */}
           <Route path="/book-service" element={<BookServiceForm />} />
           <Route path="/booking-confirmation" element={<BookingConfirmation />} />
 
-          {/* ✅ Booking aliases (fix Book Basic/Standard/Premium + old routes) */}
+          {/* ✅ FIX: Book Basic/Standard/Premium routes */}
           <Route path="/book-service/:pkg" element={<BookServiceRedirect />} />
           <Route path="/book-service-form" element={<Navigate to="/book-service" replace />} />
           <Route path="/booking" element={<Navigate to="/book-service" replace />} />
           <Route path="/book" element={<Navigate to="/book-service" replace />} />
 
+          {/* Booking aliases */}
           <Route path="/booking-confirm" element={<Navigate to="/booking-confirmation" replace />} />
           <Route path="/booking-success" element={<Navigate to="/booking-confirmation" replace />} />
           <Route path="/confirmation" element={<Navigate to="/booking-confirmation" replace />} />
@@ -130,7 +132,7 @@ export default function App() {
           <Route path="/loan-contact" element={<LoanContactRequest />} />
           <Route path="/loan-submitted" element={<LoanSubmittedSuccess />} />
 
-          {/* ✅ Loan aliases */}
+          {/* ✅ Loan aliases (fix /loan-request 404) */}
           <Route path="/loan-request" element={<Navigate to="/loan-contact" replace />} />
           <Route path="/loan-contact-request" element={<Navigate to="/loan-contact" replace />} />
           <Route path="/loan-success" element={<Navigate to="/loan-submitted" replace />} />
@@ -152,7 +154,7 @@ export default function App() {
           <Route path="/inspection-status" element={<InspectionStatus />} />
           <Route path="/land-inspection" element={<LandInspectionRequest />} />
 
-          {/* ✅ optional: if somewhere uses /plans/:id */}
+          {/* ✅ If somewhere uses /plans/:id */}
           <Route path="/plans/:id" element={<PlanRedirect />} />
 
           {/* Requirements */}
@@ -169,6 +171,6 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </WelcomeGate>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
