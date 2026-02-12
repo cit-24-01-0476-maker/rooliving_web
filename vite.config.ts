@@ -3,7 +3,8 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 export default defineConfig({
-  base: "/rooliving_web/",
+  // මෙතන තිබුන "/rooliving_web/" අයින් කරලා "/" දැම්මා
+  base: "/", 
 
   plugins: [react()],
   resolve: {
